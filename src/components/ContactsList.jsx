@@ -1,5 +1,4 @@
 import { useState } from "react";
-import useFetch from "./useFetch";
 const ContactsList = ({user, clickHandle, getDB, getLastMessage, getUsernames}) => {
 
     const [query, setQuery] = useState("");
