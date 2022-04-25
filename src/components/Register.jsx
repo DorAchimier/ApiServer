@@ -6,11 +6,21 @@ const Register = ( {addUser, isUsernameTaken} ) => {
     const [username, setUsername] = useState('');
     const [nickname, setNickname] = useState('');
     const [password, setPassword] = useState('');
+    const [photo, setPhoto] = useState("");
     const navigate = useNavigate();
+
+    const handleChangePhoto = (e) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onloadend = () => {
+            setPhoto(reader.result);
+        };
+    } 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const user = {username, nickname, password};
+        const user = {username, nickname, password, photo};
+        console.log(photo);
         if (username === "ADMIN" || isUsernameTaken(username)) {
             alert("Username already exists, please pick another one...")
         } else if (password.length < 4) {
@@ -27,7 +37,7 @@ const Register = ( {addUser, isUsernameTaken} ) => {
             <div className="content">
                 <div className="create">
                     <h2>Join Now!</h2>
-                    <form onSubmit={handleSubmit}>
+                    <form >
                         <label>Username:</label>
                         <input 
                             type="text"
@@ -52,7 +62,10 @@ const Register = ( {addUser, isUsernameTaken} ) => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <button>Create New User</button>
+                        <label>Photo:</label>
+                        <input onChange={handleChangePhoto} type="file" name="image" />
+                        <br></br>
+                        <button onClick={handleSubmit}>Create New User</button>
                     </form>
                 </div>
             </div>

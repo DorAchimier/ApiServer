@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AddFriend from "./AddFriend";
-const ContactsList = ({user, clickHandle, getDB, getLastMessage, getUsernames, getNickname, addFriend}) => {
+const ContactsList = ({user, clickHandle, getLastMessage, getUsernames, getNickname, addFriend}) => {
 
     const [buttonPopup, setButtonPopup] = useState(false);
 
@@ -24,6 +24,7 @@ const ContactsList = ({user, clickHandle, getDB, getLastMessage, getUsernames, g
                 <div className="contact-preview" key={friend.username} onClick={() => clickHandle(friend)}>
                     <h2>{friend.nickname}</h2>
                     <h4>{friend.message}</h4>
+                    <img src={friend.photo} width="100" height="100"/>
                     <div className="contact-preview-time">{friend.time}</div>
                 </div>
             ))}

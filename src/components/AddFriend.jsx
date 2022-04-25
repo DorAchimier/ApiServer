@@ -10,6 +10,7 @@ const AddFriend = ( {trigger, handleClose, getUsernames, getNickname, friends, a
         return items.filter(u => u.includes(query));
     }
 
+
     const filteredItems = getFilteredItems(query, getUsernames().filter(n => !friends.includes(n)));
 
     return ( 
