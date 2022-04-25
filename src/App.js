@@ -4,6 +4,7 @@ import Register from './components/Register';
 import MyChat from './components/MyChat';
 import NotFound from './components/NotFound';
 import { useState } from "react";
+import AddFriend from './components/AddFriend';
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
     {username: "avi_r",nickname: "Avi",password: "12883",contacts: ["d12", "joker", "mj", "skankhunter42", "s_cheeks"]},
     {username: "shavit12",nickname: "Kochava",password: "closed",contacts: ["titinsky", "phoebe"]},
     {username: "phoebe",nickname: "Lisa",password: "Sme!1yCat",contacts: ["titinsky", "shavit12", "skankhunter42"]},
-    {username: "arod12",nickname: "Aaron",password: "Immunised",contacts: []}, 
+    {username: "arod12",nickname: "Aaron",password: "Immunised",contacts: []} 
 ]);
 
 const [conversations, setConversations] = useState([
@@ -35,12 +36,12 @@ const [conversations, setConversations] = useState([
     {id:"6",message:"(:", sender:"d12", receiver:"mj", time: "13:33"},
     {id:"7",message:"???", sender:"mj", receiver:"d12", time: "13:33"},]},
 
-    {key:"joker|mj", messages:[{id:"5",message:"Why So Serious?", sender:"joker", receiver:"mj", time: "11:32"},
-    {id:"6",message:"You either die a hero, or live long enough to see yourself become the villain.", sender:"mj", receiver:"joker", time: "12:23"},
-    {id:"7",message:"..,he's the hero Gotham deserves, but not the one it needs right now. So, we'll hunt him, because he can take it. Because he's not our hero.", sender:"mj", receiver:"joker", time: "12:24"},
-    {id:"8",message:"He's a silent guardian. A watchful protector. A Dark Knight.", sender:"mj", receiver:"joker", time: "12:23"},
-    {id:"9",message:"https://youtu.be/YTHtEpKBZh4", sender:"joker", receiver:"mj", time: "12:29"},
-    {id:"10",message:"https://youtu.be/LAr6oAKieHk", sender:"mj", receiver:"joker", time: "19:53"}]}
+    {key:"joker|mj", messages:[{id:"1",message:"Why So Serious?", sender:"joker", receiver:"mj", time: "11:32"},
+    {id:"2",message:"You either die a hero, or live long enough to see yourself become the villain.", sender:"mj", receiver:"joker", time: "12:23"},
+    {id:"3",message:"..,he's the hero Gotham deserves, but not the one it needs right now. So, we'll hunt him, because he can take it. Because he's not our hero.", sender:"mj", receiver:"joker", time: "12:24"},
+    {id:"4",message:"He's a silent guardian. A watchful protector. A Dark Knight.", sender:"mj", receiver:"joker", time: "12:23"},
+    {id:"5",message:"https://youtu.be/YTHtEpKBZh4", sender:"joker", receiver:"mj", time: "12:29"},
+    {id:"6",message:"https://youtu.be/LAr6oAKieHk", sender:"mj", receiver:"joker", time: "19:53"}]}
 
 ]);
 
@@ -68,6 +69,12 @@ const [conversations, setConversations] = useState([
     return [{id:"1", message:"Waiting for messages...", sender:"ADMIN", receiver:"ADMIN", time:""}];
   } 
 
+  const doesConvoExist = (username1, username2) => {
+    var key1 = `${username1}|${username2}`;
+    var key2 = `${username2}|${username1}`;
+    const val = conversations.find((t) => t.key === key1 || t.key === key2)
+    return !!(val);
+  }
 
   const getNickname = (username) => {
     return db.find((u) => u.username === username).nickname
@@ -88,8 +95,7 @@ const [conversations, setConversations] = useState([
   }
 
   const addUser = (user) => {
-    let arr = [];
-    db.push({username:user.username, nickname:user.nickname, password:user.password, arr})
+    db.push({username:user.username, nickname:user.nickname, password:user.password, contacts:[]})
   }
 
   const isUsernameTaken = (username) => {
@@ -97,12 +103,43 @@ const [conversations, setConversations] = useState([
     return !!(db.find(un => un.username === username));
   }
 
+  const addFriend = (myUsername, friendUsername) => {
+    !db.find((u) => u.username === myUsername).contacts.includes(friendUsername) && 
+      db.find((u) => u.username === myUsername).contacts.push(friendUsername);
+  }
+
+  const getTimeStamp = () => {
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    return date+' '+time;
+  }
+
+  const getNextKey = (messageDetails) => {
+    console.log(messageDetails["id"]);
+    return messageDetails["id"] + 1;
+  }
+
+  const sendMessage = (fromUsername, toUsername, msg, timeStamp) => {
+    if (!doesConvoExist(fromUsername, toUsername)) {
+      addFriend(fromUsername, toUsername);
+      addFriend(toUsername, fromUsername);
+      conversations.push({key:`${fromUsername}|${toUsername}`, messages:[{id:"1", message:msg, sender:fromUsername, receiver:toUsername, time: getTimeStamp()}]})
+    } else {
+      var key1 = `${fromUsername}|${toUsername}`;
+      var key2 = `${toUsername}|${fromUsername}`;
+      const con = conversations.find((t) => t.key === key1 || t.key === key2)
+      var mKey = con.messages.length + 1;
+      con.messages.push({id:mKey.toString(), message:msg, sender:fromUsername, receiver:toUsername, time: getTimeStamp()})
+    }
+  }
+
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home getDB={getDB} />}/>
         <Route path="/Register" element={<Register addUser={addUser} isUsernameTaken={isUsernameTaken}/>}/>
-        <Route path="/users/:username" element={<MyChat getDB={getDB} getConversations={getConversations} getConversation={getConversation} getLastMessage={getLastMessage} getNickname={getNickname} getUsernames={getUsernames}/>}/>
+        <Route path="/users/:username" element={<MyChat getDB={getDB} getConversations={getConversations} getConversation={getConversation} getLastMessage={getLastMessage} getNickname={getNickname} getUsernames={getUsernames} getNick={getNickname} addFriend={addFriend} sendMessage={sendMessage}/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

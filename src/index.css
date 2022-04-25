@@ -206,12 +206,23 @@
   font-size: 9px;
   color: #5f5f5f;
   margin-bottom: 3px;
-  margin-top: -24px;
+  margin-top: -9px;
   position: relative;
   width: 12%;
   text-align: right;
-  margin-right: 7px;
+  margin-right: 17px;
   min-width: 260px;
+}
+
+.add-friend {
+  float: right;
+  width: 60%;
+  padding: 10px;
+  height: 600px;
+  border-bottom: 1px solid #d62c2c;
+  border-top:1px solid #d62c2c;
+
+  min-width: 100px;
 }
 
 .message-box {
@@ -367,12 +378,81 @@
 .add-friend h2 {
   font-size: 24px;
   color: #cb35f1;
-  margin-right: 30%;
+  margin-right: 10%;
   margin-bottom: 8px;
   margin-top: 20px;
   text-align: left;
-  margin-left: 50px;
+  margin-left: 20px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.popup {
+  position: absolute;
+  width: 25%;
+  padding: 0px;
+  max-width: 225px;
+  top:200px;
+  
+  border-bottom: 1px solid #ffffff;
+  border-top:1px solid #ffffff;
+
+}
+
+.popup-inner{
+  position: absolute;
+  padding:32px;
+  width: 100%;
+  height: 560px;
+  border-radius: 8px;
+  top: -70px;
+  overflow-x: scroll;
+  
+  background-color: #5f5f5f;
+}
+
+.popup-inner.close-btn{
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.popup-inner .input, .create textarea, .create select {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+
+.popup-inner button {
+  background: #f1356d;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.contact-search-preview {
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+}
+.contact-search-preview:hover {
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+}
+.contact-search-preview h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
+}
+
+.contact-search-preview h4 {
+  color: white;
+}
+.contact-search-preview a{
+  text-decoration: none;
 }
