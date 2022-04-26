@@ -242,7 +242,7 @@
   height: 600px;
   border-bottom: 1px solid #ffffff;
   border-top:1px solid #d62c2c;
-
+  
   min-width: 100px;
 }
 
@@ -251,20 +251,6 @@
   border-bottom: 1px solid #d62c2c;
 }
 
-
-.custom-file-upload {
-  float: left;
-  border: 1px solid rgb(255, 255, 255);
-  display: inline-block;
-  padding: 6px 12px;
-  cursor: pointer;
-  border-radius: 8px;
-  background-color: #f1356d;
-  width: 35%;
-  min-width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 .message-box-contact img{
   position:relative;
@@ -287,6 +273,7 @@
 .message-box textarea {
   resize: none;
   width: 70%;
+  height: 90px;
   padding: 10px 10px;
   margin-top: 460px;
   border: 1px solid rgb(199, 43, 43);
@@ -306,8 +293,9 @@
   margin-right: 15px;
   cursor: pointer;
   position: relative;
-  top: -11%;
-  left: 34%;
+  width: 30%;
+  top: -90px;
+  left: 72%;
 }
 .message-box button:active{
   background-color: #810528;
@@ -324,7 +312,7 @@
   scroll-snap-type: y proximity;
   
   position: relative;
-  bottom: 97%;
+  bottom: 115%;
   left: 0%;
 
   overflow-y: scroll;
@@ -473,6 +461,10 @@
   cursor: pointer;
 }
 
+.popup-inner button:active {
+  background: #3577f1;
+}
+
 
 .contact-search-preview {
   padding: 10px 16px;
@@ -503,4 +495,86 @@
   top:-20px;
   left: 80px;
   align-items: right;
+}
+
+.upload button {
+  background: #f1356d;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  float:right;
+  position: relative;
+  width: 8%;
+  padding: 8px;
+  max-width: 100px;
+  margin-left: 3px;
+  margin-top: 10px;
+ left: 25px;
+ top: -120px;
+}
+
+.upload-popup {
+  position: absolute;
+  height: 0px;
+  padding: 200px;
+  z-index: 100;
+  padding: 130px;
+  width: 480px;
+  border-radius: 8px;
+  top:650px;
+  background-color: #a8a4a4;
+    width:32%;
+  min-width: 100px;
+}
+
+.upload-popup-inner{
+  float: left;
+}
+
+.record {
+  position: absolute;
+  height: 0px;
+  padding: 200px;
+  z-index: 100;
+  padding: 130px;
+  width: 480px;
+  border-radius: 8px;
+  top:650px;
+  background-color: #a8a4a4;
+    width:32%;
+  min-width: 100px;
+}
+
+.record-inner{
+  float: left;
+}
+
+.upload-popup-inner.close-btn{
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.upload-popup-inner .input, .create textarea, .create select {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.upload-popup-inner button {
+  
+  background: #f1356d;
+  color: #fff;
+  border: 0;
+  top:5px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
 }

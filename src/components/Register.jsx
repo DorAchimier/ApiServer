@@ -20,7 +20,6 @@ const Register = ( {addUser, isUsernameTaken} ) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const user = {username, nickname, password, photo};
-        console.log(photo);
         if (username === "ADMIN" || isUsernameTaken(username)) {
             alert("Username already exists, please pick another one...")
         } else if (password.length < 4) {
