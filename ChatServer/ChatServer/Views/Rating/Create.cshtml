@@ -1,0 +1,44 @@
+@model ChatServer.Models.Rating
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="css/site.css">
+<nav class="navbar">
+        <h1>AmnonChat</h1>
+        <button>Home</button>
+    </nav>
+
+    <div class="rating-box">
+        <div class="create">
+            <form asp-action="Create">
+                <br/>
+                <h2>Your opinion does not matter to us!</h2>
+                <label>Name:</label>
+                <input name="name" placeholder="Name" required/>
+                <label>Rating:</label>
+                <select id="Rate" name="score">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected>5</option>
+                </select>
+                <label>Review:</label>
+                <textarea name="comment" placeholder="Whine here..." required></textarea>
+                <div class="blog-details">
+                    <br/>
+                    <div class="submit"><input type="submit" value="Send"/></div>
+                </div>
+            </form>
+            <a asp-action="Index"><button>Back</button></a>
+
+            <br/>
+        </div>
+    </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

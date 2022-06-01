@@ -1,0 +1,19 @@
+@model ChatServer.Models.Rating
+
+<link rel="stylesheet" type="text/css" href="css/site.css">
+<nav class="navbar">
+    <h1>AmnonChat</h1>
+    <button>Home</button>
+</nav>
+<div class="single-review-block">
+    <div class="single-review">
+        <h1>@Model.Score</h1>
+        <h3>By @Model.Name, On @Model.When</h3>
+        <h2>@Model.Text</h2>
+        <br/>
+        <a asp-action="Index"><button>Back</button></a>
+        <a asp-action="Edit" asp-route-id="@Model.Id"><button>Edit</button></a>
+        <a asp-action="Delete" asp-route-id="@Model.Id"><button>Delete</button></a>
+    </div>
+</div>
+

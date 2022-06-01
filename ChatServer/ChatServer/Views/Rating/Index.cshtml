@@ -1,0 +1,55 @@
+
+@model List<Rating>
+<link rel="stylesheet" type="text/css" href="css/site.css">
+@{
+    double count = Model.Count, sum = 0, res = 0;
+    @if(count > 0)
+    {
+        @foreach (var rate in Model)
+        {
+            sum += rate.Score;
+        }
+        res = sum/ count;
+    }
+}
+<nav class="navbar">
+    <h1>AmnonChat</h1>
+    <button>Home</button>
+</nav>
+
+<div class="rating-box">
+    <div class="create">
+        <br/>
+        <h2>Your opinion does not matter to us!</h2>
+        <div class="blog-details">
+            <form asp-action="Search">
+                <input placeholder="Type query..." name="query" required/>
+                <div class="submit"><input type="submit" value="Search a review"/></div>
+            </form>
+            <a asp-action="Index"><button>Clear Search</button></a>
+            <a asp-action="Create"><button>Add Review</button></a>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <h2>Avergae: @res</h2>
+    </div>
+       
+    @foreach (var rate in Model)
+    {
+        <a asp-action="Details" asp-route-id="@rate.Id">
+            <div class="blog-preview">
+                <h1>@rate.Score</h1>
+                <h3>@rate.Name</h3>
+                <h3>@rate.When</h3>
+                <h2>@rate.Text</h2>
+            </div>
+        </a>
+    }
+    <br/>
+    <br/>
+    <br/>
+</div>
+<div class="center">
+    <img src="https://cdn.shopify.com/s/files/1/0509/4991/4778/products/ricknmortystickers-10.png?v=1607299867" alt="Your Opinion" width="300" height="300">
+</div>

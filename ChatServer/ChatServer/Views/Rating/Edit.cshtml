@@ -1,0 +1,46 @@
+@model ChatServer.Models.Rating
+
+<link rel="stylesheet" type="text/css" href="css/site.css">
+<nav class="navbar">
+    <h1>AmnonChat</h1>
+    <button>Home</button>
+</nav>
+
+<div class="rating-box">
+    <div class="create">
+        <form asp-action="Edit" asp-route-id="@Model.Id">
+            <br/>
+            <h2>Edit your review, as if it is going to change something...</h2>
+            <label>Name:</label>
+            <input placeholder="Name" name="name" value="@Model.Name" required/>
+            <label>Rating:</label>
+            <select id="Rate" name="score">
+                @{
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        if (Model.Score == i)
+                        {
+                            <option value="@i" selected>@i</option>
+                        }
+                        else
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    }
+                }
+            </select>
+            <label>Review:</label>
+            <textarea placeholder="Whine here..." name="comment" required>@Model.Text</textarea>
+            <div class="blog-details">
+                <br/>
+                <div class="submit"><input type="submit" value="Send"/></div>
+            </div>
+        </form>
+        <a asp-action="Details" asp-route-id="@Model.Id"><button>Cancel</button></a>
+        <br/>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
