@@ -1,23 +1,37 @@
 import { useState } from "react";
 import Navbar from "./Navbar";
 import { useNavigate } from 'react-router-dom';
-
-const Home = ({ getDB } ) => {
-
+const Home = () => {
+    
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const db = getDB();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const userDetails = db.find(u => u.username === username)
-        if (userDetails && userDetails.password === password) {
-            navigate(`/users/${username}`)
-        } else {
-            alert("Wrong username or password");
-        }
+        var data = ({
+        "username": username,
+        "name": "nickname",
+        "password": password,
+        "server": "localhost:3000"
+      });
+    var options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
     }
+    fetch("https://localhost:7033/api/validate", options).then(res => 
+        {
+            if (res.status != 200) {
+                alert("Wrong username and/or password...")
+            } else {
+                navigate(`/users/${username}`)
+            }
+        })
+    }
+
 
     return ( 
         <div className="App">

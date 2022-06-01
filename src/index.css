@@ -523,8 +523,8 @@
   padding: 130px;
   width: 480px;
   border-radius: 8px;
-  top:650px;
-  background-color: #a8a4a4;
+  top:645px;
+  background-color: #ffffff;
     width:32%;
   min-width: 100px;
 }
@@ -542,8 +542,8 @@
   width: 480px;
   border-radius: 8px;
   top:650px;
-  background-color: #a8a4a4;
-    width:32%;
+  background-color: #ffffff;
+  width:32%;
   min-width: 100px;
 }
 
@@ -569,12 +569,17 @@
 }
 
 .upload-popup-inner button {
-  
   background: #f1356d;
   color: #fff;
   border: 0;
-  top:5px;
+  top:0px;
+  left: 60px;
+  width: 58px;
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.upload-popup-inner button:active {
+  background-color: #3577f1;
 }

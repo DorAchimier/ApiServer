@@ -3,33 +3,42 @@ import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import ContactsList from "./ContactsList";
 import MessageBox from "./MessageBox";
+import axios from "axios";
 
 const MyChat = ( { getDB , getConversation, getLastMessage, getNickname, getUsernames, getNick, addFriend, sendMessage, getPhoto } ) => {
     const { username } = useParams();
-    const db = getDB(); 
-
+    const url1 = "https://localhost:7033/api/";
+    const url2 = "/nickname";
     const [ pressedContact, setPressedContact ] = useState(null);
     const [ pUsername, setPUsername ] = useState(null);
     const [ numOfSends, setNumOfSends ] = useState(0);
-    const userDetails = db.find((u) => u.username === username);
-
-    useEffect(() => {
-        {pressedContact && <MessageBox username={username} pressedContact={pressedContact} pUsername={pUsername} getConversation={getConversation} sendMessage={sendMessage} sendHandler={addSend} getPhoto={getPhoto}/>}
-    }, [pressedContact, numOfSends]);
+    const [ userDetails, setUserDetails ] = useState([]);
+    const [ nickname, setNickname ] = useState([]);
+    
 
     const addSend = () => {
         setNumOfSends(numOfSends + 1);
     }
-    
+
     const clickHandle = (friend) => {
-        setPressedContact(getNickname(friend.username));
-        setPUsername(friend.username);
+        setPressedContact(friend);
     }
+
+    useEffect(() => { 
+        axios.get(url1 + username + url2).then(res => {
+            console.log(res)
+            setNickname(res.data.name)
+        }).catch(err => {console.log(err)})
+        {pressedContact && <MessageBox username={username} pressedContact={pressedContact} pUsername={pUsername} getConversation={getConversation} sendMessage={sendMessage} sendHandler={addSend} getPhoto={getPhoto}/>}
+        {<ContactsList username={username} clickHandle={clickHandle} getLastMessage={getLastMessage} getUsernames={getUsernames} getNickname={getNick} addFriend={addFriend}/>}
+
+    }, [pressedContact, numOfSends]);
+//
     return ( 
         <div className="App">
-            <Navbar pageName="Sign Out" pageRef="/" />
+            <Navbar pageName="Sign Out" pageRef="/" extraText={nickname} />
             <div className="chat-screen">
-                <ContactsList user={userDetails} clickHandle={clickHandle} getLastMessage={getLastMessage} getUsernames={getUsernames} getNickname={getNick} addFriend={addFriend} username={username}/>
+                <ContactsList username={username} clickHandle={clickHandle} getLastMessage={getLastMessage} getUsernames={getUsernames} getNickname={getNick} addSend={addSend}/>
                 {pressedContact && <MessageBox username={username} pressedContact={pressedContact} pUsername={pUsername}  getConversation={getConversation} sendMessage={sendMessage} sendHandler={addSend} getPhoto={getPhoto}/>}
             </div>
         </div>

@@ -1,20 +1,31 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import AddFriend from "./AddFriend";
-const ContactsList = ({user, clickHandle, getLastMessage, getUsernames, getNickname, addFriend}) => {
+import axios from "axios";
+
+const ContactsList = ({username, clickHandle, getLastMessage, getUsernames, getNickname, addSend}) => {
 
     const [buttonPopup, setButtonPopup] = useState(false);
-    const myFriends = user.contacts;
+    const [ contacts, setContacts ] = useState([]);
+
+    let url1 = "https://localhost:7033/api/"
+    let url2 = "/contacts"
 
     const togglePopup = () => {
+        addSend();
         setButtonPopup(!buttonPopup);
     }
 
-    useEffect(() => {
-        {<AddFriend trigger={buttonPopup} handleClose={togglePopup} getUsernames={getUsernames} getNickname={getNickname} friends={user.contacts + user.username} addFriend={addFriend} username={user.username}/> 
+    const dateSort = (array) => {
+        return array.sort((a, b) => b.last - a.last).reverse();
     }
-    }, [myFriends]);
 
-    const contacts = user && getLastMessage(user.username, user.contacts);
+
+    useEffect(() => { 
+            axios.get(url1 + username + url2).then(res => {
+                console.log(res)
+                setContacts(res.data)
+            }).catch(err => {console.log(err)})
+    }, []);
 
     return ( 
         <div className="contacts-block">
@@ -22,16 +33,17 @@ const ContactsList = ({user, clickHandle, getLastMessage, getUsernames, getNickn
                 <div className="add-friend" onClick={() => togglePopup()}>
                 <h2>+ Start New Chat</h2>
                 </div>
-                <AddFriend trigger={buttonPopup} handleClose={togglePopup} getUsernames={getUsernames} getNickname={getNickname} friends={user.contacts + user.username} addFriend={addFriend} username={user.username}/> 
+                <AddFriend trigger={buttonPopup} handleClose={togglePopup} getUsernames={getUsernames} getNickname={getNickname} friends={contacts} addSend={addSend} username={username}/> 
             </div>
             
             {contacts && contacts.map(friend => (
-                <div className="contact-preview" key={friend.username} onClick={() => clickHandle(friend)}>
-                    <h2>{friend.nickname}</h2>
-                    {friend.type === "text" && <h4>{friend.message}</h4>}
-                    {friend.type !== "text" && <h4>{friend.type}</h4>}
-                    <img src={friend.photo} width="100" height="100"/>
-                    <div className="contact-preview-time">{friend.time}</div>
+                <div className="contact-preview" key={friend.id} onClick={() => clickHandle(friend.id)}>
+                    <h2>{friend.name}</h2>
+                    <h4>{friend.last}</h4>
+                    {/* {friend.type !== "text" && <h4>{friend.type}</h4>} */}
+                    {/* <img src={friend.photo} width="100" height="100" alt="profile-pic"/> */}
+                    {console.log(friend.last)}
+                    {friend.last != "" && <div className="contact-preview-time">{friend.lastDate}</div>}
                 </div>
             ))}
         </div>
