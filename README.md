@@ -21,6 +21,11 @@ note: pay attention to the case. (the database is case sensitive).
 
 
 # Run the api server 
-
+1. switch to "ServerBranch" branch
+1. download the zip file (Code -> Download Zip)
+2. unzip
+3. open the directory directory in the terminal
+4. type the command `npm install`
+5. type the command `npm start`
 
 # run the Reviews page
