@@ -18,7 +18,7 @@ note: pay attention to the case. (the database is case sensitive).
 6. username:f password: aa3aa
 7. username:g password: aaa2a
  <br />
-the users above exist, but they have no chats or contacts, you can do whatever you want with them or create a new user.
+The users above exist, but they have no chats or contacts, you can do whatever you want with them or create a new user.
 
 
 
