@@ -19,8 +19,9 @@ note: pay attention to the case. (the database is case sensitive).
 6. username:f password: aa3aa
 7. username:g password: aaa2a
  <br />
-The users above exist, but they have no chats or contacts, you can do whatever you want with them or create a new user.\
-In order for it to work, the api server should be running, make sure to run the api server first.
+The users above exist, but they have no chats or contacts, you can do whatever you want with them or create a new user.
+<br />
+Make sure to run the api server first.
 
 
 # Run the api server 
