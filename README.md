@@ -21,7 +21,7 @@ note: pay attention to the case. (the database is case sensitive).
  <br />
 The users above exist, but they have no chats or contacts, you can do whatever you want with them or create a new user.
 <br />
-#### Make sure to run the api server first.
+### Make sure to run the api server first.
 
 
 # Run the api server 
