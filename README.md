@@ -17,6 +17,7 @@ note: pay attention to the case. (the database is case sensitive).
 5. username:e password: aaadaa
 6. username:f password: aa3aa
 7. username:g password: aaa2a
+the users above exist, but they have no chats or contacts, you can do whatever you want with them or create a new user.
 
 
 
@@ -34,3 +35,6 @@ note: pay attention to the case. (the database is case sensitive).
 3. open the ApiServer-master/ChatServer/ChatServer directory in the terminal
 4. type the command `dotnet run`
 5. open https://localhost:7012 in a web browser
+
+# Note
+make sure ports 7012 and 7033 are available.
