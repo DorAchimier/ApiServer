@@ -1,5 +1,5 @@
 # How to run it
-<br />
+
 ## Run the client app
 1. switch to "Front" branch
 1. download the zip file (Code -> Download Zip)
