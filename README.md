@@ -3,7 +3,7 @@
 1. switch to "Front" branch
 1. download the zip file (Code -> Download Zip)
 2. unzip
-3. open the directory directory in the terminal
+3. open the directory in the terminal
 4. type the command `npm install`
 5. type the command `npm start`
 
@@ -24,8 +24,13 @@ note: pay attention to the case. (the database is case sensitive).
 1. switch to "master" branch
 1. download the zip file (Code -> Download Zip)
 2. unzip
-3. open the directory directory in the terminal
-4. type the command `npm install`
-5. type the command `npm start`
+3. open the ApiServer-master/ChatServer/ChatApi directory in the terminal
+4. type the command `dotnet run`
 
 # run the Reviews page
+1. switch to "master" branch
+1. download the zip file (Code -> Download Zip)
+2. unzip
+3. open the ApiServer-master/ChatServer/ChatServer directory in the terminal
+4. type the command `dotnet run`
+5. open https://localhost:7012 in a web browser
